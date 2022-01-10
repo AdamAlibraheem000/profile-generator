@@ -64,40 +64,140 @@ function baseQuestions() {
     ])
     .then((answers) => {
       if (answers.menu === "engineer") {
-        console.log("engineers are gay!");
+        engineerGenerator();
+      } else if (answers.menu === "intern") {
+        internGenerator();
       }
     });
 }
 
 function engineerGenerator() {
-  return inquirer.prompt([
-    {
-      type: "input",
-      message: "Enter engineer's name?",
-      name: "nameEng",
-      validate: (nameEngValid) => {
-        if (nameEngValid) {
-          return true;
-        } else {
-          console.log("team engineer's name required");
-          return false;
-        }
+  return inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "Enter engineer's name?",
+        name: "nameEng",
+        validate: (nameEngValid) => {
+          if (nameEngValid) {
+            return true;
+          } else {
+            console.log("team engineer's name required");
+            return false;
+          }
+        },
       },
-    },
-    {
-      type: "input",
-      message: "Enter engineer's ID number?",
-      name: "IDEng",
-      validate: (IDEngValid) => {
-        if (IDEngValid) {
-          return true;
-        } else {
-          console.log("team engineer's ID number required");
-          return false;
-        }
+      {
+        type: "input",
+        message: "Enter engineer's ID number?",
+        name: "IDEng",
+        validate: (IDEngValid) => {
+          if (IDEngValid) {
+            return true;
+          } else {
+            console.log("team engineer's ID number required");
+            return false;
+          }
+        },
       },
-    },
-  ]);
+      {
+        type: "input",
+        message: "Enter engineer's email address?",
+        name: "emailEng",
+        validate: (emailEngValid) => {
+          if (emailEngValid) {
+            return true;
+          } else {
+            console.log("engineer's email address required");
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        message: "Enter engineer's github username?",
+        name: "githubEng",
+        validate: (githubEngValid) => {
+          if (githubEngValid) {
+            return true;
+          } else {
+            console.log("github username required");
+            return false;
+          }
+        },
+      },
+    ])
+    .then((answers) => {
+      console.log(answers);
+      buildHTML();
+    });
+}
+
+function internGenerator() {
+  return inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "Enter intern's name?",
+        name: "nameInt",
+        validate: (nameIntValid) => {
+          if (nameIntValid) {
+            return true;
+          } else {
+            console.log("intern's name required");
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        message: "Enter intern's ID?",
+        name: "IDInt",
+        validate: (IDIntValid) => {
+          if (IDIntValid) {
+            return true;
+          } else {
+            console.log("intern's ID required");
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        message: "Enter intern's email?",
+        name: "emailInt",
+        validate: (emailIntValid) => {
+          if (emailIntValid) {
+            return true;
+          } else {
+            console.log("intern's email required");
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        message: "Enter intern's school?",
+        name: "schoolInt",
+        validate: (schoolIntValid) => {
+          if (schoolIntValid) {
+            return true;
+          } else {
+            console.log("intern's school required");
+            return false;
+          }
+        },
+      },
+    ])
+    .then((answers) => {
+      console.log(answers);
+      buildHTML();
+    });
+}
+
+function buildHTML() {
+  // functtion to build html
+  console.log("HTML built");
 }
 
 baseQuestions();

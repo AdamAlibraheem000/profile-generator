@@ -75,8 +75,9 @@ function baseQuestions() {
         answers.email,
         answers.officeNum
       );
+      console.log(manager);
       arr.push(manager);
-      testArr();
+      // testArr();
       if (answers.menu === "engineer") {
         engineerGenerator();
       } else if (answers.menu === "intern") {
@@ -150,8 +151,9 @@ function engineerGenerator() {
         answers.emailEng,
         answers.githubEng
       );
+      console.log(engineer);
       arr.push(engineer);
-      testArr();
+      // testArr();
       confirmation();
     });
 }
@@ -220,7 +222,7 @@ function internGenerator() {
         answers.schoolInt
       );
       arr.push(intern);
-      testArr();
+      // testArr();
       confirmation();
     });
 }
@@ -263,10 +265,20 @@ function confirmation() {
 function buildHTML() {
   // function to build html
   // For loop of arr to generate constructors
+
+  for (i = 0; i < arr.length; i++) {
+    if (arr[i].getRole() === "Manager") {
+      console.log("Manager");
+    } else if (arr[i].getRole() === "Engineer") {
+      console.log("Engineer");
+    } else if (arr[i].getRole() === "Intern") {
+      console.log("Intern");
+    }
+  }
   // if arr[i].getRole() === Manager : manager card
   // if arr[i].getRole() === Engineer : engineer card
   // if arr[i].getRole() === Intern : intern card
-  console.log("Build HTML");
+  // console.log("Build HTML");
   // return ``;
 }
 
@@ -276,5 +288,5 @@ function testArr() {
   }
 }
 
-// baseQuestions();
-confirmation();
+baseQuestions();
+// engineerGenerator();

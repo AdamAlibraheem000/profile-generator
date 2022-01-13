@@ -1,4 +1,8 @@
 const inquirer = require("inquirer");
+const Employee = require("./lib/Employee");
+const Manager = require("./lib/Manager");
+
+const arr = [];
 
 function baseQuestions() {
   return inquirer
@@ -63,6 +67,13 @@ function baseQuestions() {
       },
     ])
     .then((answers) => {
+      const manager = new Manager(
+        answers.name,
+        answer.ID,
+        answers.email,
+        answers.officeNum
+      );
+      arr.push(manager);
       if (answers.menu === "engineer") {
         engineerGenerator();
       } else if (answers.menu === "intern") {
@@ -196,8 +207,13 @@ function internGenerator() {
 }
 
 function buildHTML() {
-  // functtion to build html
-  console.log("HTML built");
+  // function to build html
+  // For loop of arr to generate constructors
+  // if arr[i].getRole() === Manager : manager card
+  // if arr[i].getRole() === Engineer : engineer card
+  // if arr[i].getRole() === Intern : intern card
+
+  return ``;
 }
 
 baseQuestions();

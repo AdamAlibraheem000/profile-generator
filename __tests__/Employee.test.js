@@ -32,9 +32,9 @@ test("Checks if method returns string", () => {
   );
 });
 
-// Tests if object is returned
-test("checks if object is returned", () => {
+// Tests if "Employee" string is returned
+test("checks if string 'Employee' is returned", () => {
   const empl = new Employee("Bill", 23, "email@email.com");
 
-  expect(empl.getRole()).objectContaining(Employee);
+  expect(empl.getRole()).toBe("Employee");
 });

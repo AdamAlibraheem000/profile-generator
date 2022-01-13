@@ -1,6 +1,8 @@
 const inquirer = require("inquirer");
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 
 const arr = [];
 
@@ -69,15 +71,18 @@ function baseQuestions() {
     .then((answers) => {
       const manager = new Manager(
         answers.name,
-        answer.ID,
+        answers.ID,
         answers.email,
         answers.officeNum
       );
       arr.push(manager);
+      testArr();
       if (answers.menu === "engineer") {
         engineerGenerator();
       } else if (answers.menu === "intern") {
         internGenerator();
+      } else {
+        buildHTML();
       }
     });
 }
@@ -139,8 +144,15 @@ function engineerGenerator() {
       },
     ])
     .then((answers) => {
-      console.log(answers);
-      buildHTML();
+      const engineer = new Engineer(
+        answers.nameEng,
+        answers.IDEng,
+        answers.emailEng,
+        answers.githubEng
+      );
+      arr.push(engineer);
+      testArr();
+      confirmation();
     });
 }
 
@@ -201,8 +213,50 @@ function internGenerator() {
       },
     ])
     .then((answers) => {
+      const intern = new Intern(
+        answers.nameInt,
+        answers.IDInt,
+        answers.emailInt,
+        answers.schoolInt
+      );
+      arr.push(intern);
+      testArr();
+      confirmation();
+    });
+}
+
+function confirmation() {
+  return inquirer
+    .prompt([
+      {
+        type: "confirm",
+        name: "confirmSelection",
+        message: "Do you wish to add another employee?",
+        default: true,
+      },
+    ])
+    .then((answers) => {
       console.log(answers);
-      buildHTML();
+      if (answers.confirmSelection === true) {
+        inquirer
+          .prompt([
+            {
+              type: "list",
+              name: "menu",
+              message: "Choose from the following options ",
+              choices: ["engineer", "intern"],
+            },
+          ])
+          .then((answers) => {
+            if (answers.menu === "engineer") {
+              engineerGenerator();
+            } else if (answers.menu === "intern") {
+              internGenerator();
+            }
+          });
+      } else {
+        buildHTML();
+      }
     });
 }
 
@@ -212,8 +266,15 @@ function buildHTML() {
   // if arr[i].getRole() === Manager : manager card
   // if arr[i].getRole() === Engineer : engineer card
   // if arr[i].getRole() === Intern : intern card
-
-  return ``;
+  console.log("Build HTML");
+  // return ``;
 }
 
-baseQuestions();
+function testArr() {
+  for (i = 0; i < arr.length; i++) {
+    console.log(arr[i]);
+  }
+}
+
+// baseQuestions();
+confirmation();
